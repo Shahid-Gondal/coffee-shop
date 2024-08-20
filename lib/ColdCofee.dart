@@ -23,10 +23,10 @@ class _ColdCofeeState extends State<ColdCofee> {
           color: Colors.red,
       ),
       Container(
-        color: Colors.red,
+        color: Colors.green,
       ),
       Container(
-        color: Colors.red,
+        color: Colors.blue,
       ),
       Container(
         color: Colors.red,
