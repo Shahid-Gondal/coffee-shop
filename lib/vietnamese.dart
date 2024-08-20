@@ -21,10 +21,7 @@ class _VietnameseScreenState extends State<VietnameseScreen> {
       backgroundColor: Color(0xff212325),
       appBar: AppBar(
       backgroundColor: Color(0xff212325),
-        leading: Icon(
-          Icons.arrow_back_ios_new,
-          color: Colors.white,
-        ),
+        leading: BackButton(color: Colors.white,),
       ),
       body: SingleChildScrollView(
         child: SafeArea(

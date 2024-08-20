@@ -1,7 +1,11 @@
 import 'dart:io';
 
-import 'package:coffeeapp/Hotcoffee.dart';
+import 'package:coffeeapp/ColdCofee.dart';
+import 'package:coffeeapp/HotCoffee.dart';
+import 'package:coffeeapp/coffee_type.dart';
+import 'package:coffeeapp/offer.dart';
 import 'package:coffeeapp/vietnamese.dart';
+import 'package:coffeeapp/welcomscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +21,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+
+  String coffeeType = "Coffee Type";
+  String recentorders = "Recent Orders";
+  String offers = "Offers";
+  String rewards = "Rewards";
+  String Settings = "Settings";
+
   List<String> img = [
     "Vietnamese",
     "Caffemocha",
@@ -47,19 +58,60 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: const BackButton(
+          actions: [
+            PopupMenuButton(
+              icon: Icon(
+                Icons.more_vert_outlined,
+                color: Colors.white,
+              ),
+              color: Color(0xff212325),
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CoffeeType(),
+                          ));
+                    },
+                    child: Text(
+                      coffeeType,
+                      style: TextStyle(color: Colors.white),
+                    )),
+                PopupMenuItem(
+                    child: Text(
+                  recentorders,
+                  style: TextStyle(color: Colors.white),
+                )),
+                PopupMenuItem(
+                    child: Text(
+                  offers,
+                  style: TextStyle(color: Colors.white),
+                )),
+                PopupMenuItem(
+                    child: Text(
+                  rewards,
+                  style: TextStyle(color: Colors.white),
+                )),
+                PopupMenuItem(
+                    child: Text(
+                  Settings,
+                  style: TextStyle(color: Colors.white),
+                )),
+              ],
+            )
+          ],
+          leading: BackButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Welcomscreen(),
+                  ));
+            },
             color: Colors.white,
           ),
           backgroundColor: const Color(0xff212325),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: Icon(
-                Icons.notification_important_rounded,
-                color: Colors.white,
-              ),
-            ),
-          ],
         ),
         backgroundColor: const Color(0xff212325),
         body: SingleChildScrollView(
@@ -101,11 +153,12 @@ class _HomeScreenState extends State<HomeScreen>
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: TextField(
-                          onTap: (){
-                            showSearch(context: context, delegate: CustomSearchDelegate());
+                          onTap: () {
+                            showSearch(
+                                context: context,
+                                delegate: CustomSearchDelegate());
                           },
                           decoration: InputDecoration(
-
                               hintText: ("Find Your Coffee"),
                               hintStyle: GoogleFonts.poppins(
                                 color: Colors.white54,
@@ -169,6 +222,8 @@ class _HomeScreenState extends State<HomeScreen>
                   ]),
               Center(
                   child: [
+                    Hotcoffee(),
+                    ColdCofee(),
                 Container(
                   height: 500,
                   child: GridView.builder(
@@ -262,119 +317,104 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
                 Container(
-                  height: 400,
-                  child: GridView.extent(
-                    maxCrossAxisExtent: 200,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/images/pic1.png")),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HotCoffee(),
-                                ));
-                          },
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/pic2.png"),
-                                  fit: BoxFit.fill),
+                  height: 500,
+                  child: GridView.builder(
+                    itemCount: img.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 150 / 195,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 0,
+                    ),
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  VietnameseScreen(img: img[index]),
                             ),
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            color: const Color(0xff212325),
+                            borderRadius: BorderRadius.circular(13),
+                            boxShadow: const [
+                              BoxShadow(color: Colors.black, blurRadius: 20),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: Image.asset(
+                                    "assets/images/${img[index]}.png",
+                                    fit: BoxFit.cover,
+                                    height: 100,
+                                    width: 100,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                img[index],
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                "Best coffee",
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "\$30",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  CircleAvatar(
+                                    radius: 15,
+                                    backgroundColor: Colors.orange,
+                                    child: Icon(
+                                      CupertinoIcons.add,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
-                Container(
-                  height: 400,
-                  child: GridView.extent(
-                    maxCrossAxisExtent: 200,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/images/pic3.png")),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HotCoffee(),
-                                ));
-                          },
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/pic4.png"),
-                                  fit: BoxFit.fill),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 400,
-                  child: GridView.extent(
-                    maxCrossAxisExtent: 200,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/images/pic3.png")),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HotCoffee(),
-                                ));
-                          },
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/pic4.png"),
-                                  fit: BoxFit.fill),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
+
+
               ][_tabController.index]),
             ])));
   }
 }
-
-
 
 class CustomSearchDelegate extends SearchDelegate {
   List<String> searchTerms = [
@@ -408,7 +448,7 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget? buildLeading(BuildContext context) {
     IconButton(
         onPressed: () {
-          close(context,null);
+          close(context, null);
         },
         icon: Icon(Icons.arrow_back_ios_new));
   }
