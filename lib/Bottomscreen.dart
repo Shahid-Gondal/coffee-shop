@@ -43,28 +43,28 @@ class _BottomScreenState extends State<BottomScreen> {
                   icon: Icon(
                     Icons.home,
                     size: 30,
-                    color: Colors.white,
+                    color: Colors.orange,
                   ),
                   label: "Home"),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.favorite,
                     size: 30,
-                    color: Colors.white,
+                    color: Colors.orange,
                   ),
                   label: "Favourite"),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.notification_important,
                     size: 30,
-                    color: Colors.white,
+                    color: Colors.orange,
                   ),
                   label: "Notification"),
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
                   size: 30,
-                  color: Colors.white,
+                  color: Colors.orange,
                 ),
                 label: "Profile",
               ),

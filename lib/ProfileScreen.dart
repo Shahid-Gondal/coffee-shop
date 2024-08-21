@@ -16,15 +16,16 @@ class _ProfilescreenState extends State<Profilescreen> {
         title: Text("Profile",style: GoogleFonts.poppins(
           color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold,
         ),),
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.orange,
       ),
       drawer: Drawer(
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.orange,
       ),
       backgroundColor: Color(0xff212325),
       body:
       Column(crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(height: 50,),
           Center(
             child: CircleAvatar(
               backgroundImage: AssetImage("assets/images/pic3.png"),

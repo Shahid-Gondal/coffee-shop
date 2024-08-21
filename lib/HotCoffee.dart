@@ -1,5 +1,7 @@
+import 'package:coffeeapp/vietnamese.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 class Hotcoffee extends StatefulWidget {
   const Hotcoffee({super.key});
 
@@ -20,8 +22,7 @@ class _HotcoffeeState extends State<Hotcoffee> {
       height: 500,
       child: GridView.builder(
         itemCount: img.length,
-        gridDelegate:
-        const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 150 / 195,
           mainAxisSpacing: 0,
@@ -30,7 +31,11 @@ class _HotcoffeeState extends State<Hotcoffee> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VietnameseScreen(img: img[index]),
+                  ));
             },
             child: Container(
               margin: const EdgeInsets.all(12),
@@ -39,7 +44,7 @@ class _HotcoffeeState extends State<Hotcoffee> {
                 color: const Color(0xff212325),
                 borderRadius: BorderRadius.circular(13),
                 boxShadow: const [
-                  BoxShadow(color: Colors.black, blurRadius: 20),
+                  BoxShadow(color: Colors.orange, blurRadius: 7),
                 ],
               ),
               child: Column(
@@ -76,8 +81,7 @@ class _HotcoffeeState extends State<Hotcoffee> {
                     ),
                   ),
                   Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         "\$30",
@@ -101,6 +105,6 @@ class _HotcoffeeState extends State<Hotcoffee> {
           );
         },
       ),
-    ) ;
+    );
   }
 }

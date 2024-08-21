@@ -1,4 +1,5 @@
 import 'package:coffeeapp/Bottomscreen.dart';
+import 'package:coffeeapp/ColdCofee.dart';
 import 'package:coffeeapp/home.dart';
 import 'package:coffeeapp/saplash_secreen.dart';
 import 'package:coffeeapp/vietnamese.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BottomScreen(),
+      home: SaplashSecreen(),
 
     );
   }
